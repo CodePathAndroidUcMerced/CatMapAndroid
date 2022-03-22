@@ -12,16 +12,16 @@
 
 
 ### Description
-View, Search courses schedule. Seacrh a class, building location on a map.Users can save their course.
+Allows users to search and view course schedules. Building location of classes can then be displayed on a map. Users can create accounts to save their course schedules.
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
 - **Category:** Education
-- **Mobile:** This app is primarily developed for mobile.
-- **Story:** Users can create and login to an acount. Search for their classes and have it displays on a map.
-- **Market:** Uc merced population and any individual navigating to uc merced
-- **Habit:** It could be use often during the beginning of the semester. After Visitor can use to navigate around the campus.
-- **Scope:** First we want to connect classes and location. Next expending the detail like actual class location on the building, floors and also office.
+- **Mobile:** This app is primarily developed for mobile, but has potential to be used on other platforms. Mobile has more possibilities for navigation and expanded features, however.
+- **Story:** Users can create and login to an account. They can search for their classes and have it displayed on a map.
+- **Market:** UC Merced population and any individual navigating to UC Merced
+- **Habit:** It could be used often during the beginning of the semester to locate classes. Visitors can use to navigate around the campus when touring.
+- **Scope:** First we want to connect classes to their map location. Next we could improve the details, such as displaying floor numbers, accurate location within the building, and office hours. If successful and polished enough, we could try and integrate officially with the university.
 
 ## Product Spec
 
@@ -29,16 +29,17 @@ View, Search courses schedule. Seacrh a class, building location on a map.Users 
 
 **Required Must-have Stories**
 
-* User logs in to acces their acount. New user can sign up.
-*  User can Search a class location, Display the location on a map or layer with Makers or point.
-* User profile page with saved classes.
-* View all classes by semester, mejor and more.
+* User logs in to access their account. New user can create an account.
+*  User can search for a course, have the location displayed on a map with a marker.
+* User has profile page with saved classes.
+* View all classes by semester, major and more.
 
 **Optional Nice-to-have Stories**
 
 
-* Forget Password
-* Detail on location as floor number, class location in the building
+* Forget Password (password reset)
+* Details of location such as floor number, class location within the building
+* Highlight building entrances
 
 
 
@@ -49,27 +50,26 @@ View, Search courses schedule. Seacrh a class, building location on a map.Users 
 * Register
    * User signs up. 
 * Home Screen
-   * splay the campus map, and allow user to search the    location of  a class.
-* Myclass Screen
-  * Display user saved classes
+   * Display the campus map, and allow user to search a class to display its location.
+* MyClasses Screen
+  * Display user's saved classes
 * AllClasses
-  *  Display all course by semester
+  *  Display all course by semester, search by class category or text search.
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
 * Home
-* Myclass
+* MyClasses
 * AllClasses
 * Profile
 
 **Flow Navigation** (Screen to Screen)
 
-* Login -> Home -> Register
-* Register -> Home
+* Login -> Register (if new user) -> Home
 * Home -> Search Bar
-* Myclasses -> Main section -> Lab/Disscution
+* MyClasses -> Main section -> Lab/Discussion
 
 
 
@@ -78,13 +78,9 @@ View, Search courses schedule. Seacrh a class, building location on a map.Users 
 
 ![](https://i.imgur.com/Rac29eD.jpg)
 
-
 ### [BONUS] Digital Wireframes & Mockups
 
-
 ![](https://i.imgur.com/cZMmWjd.png)
-
-
 
 ### [BONUS] Interactive Prototype
 
