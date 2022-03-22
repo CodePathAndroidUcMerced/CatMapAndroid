@@ -75,8 +75,9 @@ View, Search courses schedule. Seacrh a class, building location on a map.Users 
 
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+
+![](https://i.imgur.com/Rac29eD.jpg)
+
 
 ### [BONUS] Digital Wireframes & Mockups
 
