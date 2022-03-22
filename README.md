@@ -81,6 +81,11 @@ View, Search courses schedule. Seacrh a class, building location on a map.Users 
 
 ### [BONUS] Digital Wireframes & Mockups
 
+
+![](https://i.imgur.com/cZMmWjd.png)
+
+
+
 ### [BONUS] Interactive Prototype
 
 ## Schema 
