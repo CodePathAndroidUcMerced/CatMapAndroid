@@ -86,9 +86,60 @@ Allows users to search and view course schedules. Building location of classes c
 
 ## Schema 
 [This section will be completed in Unit 9]
+
 ### Models
 [Add table of models]
+Classes
+
+| **Property** | **Type** | **Description** |
+|--------------|:--------:|-----------------|
+| subject      |string    | name of subject |
+| crn          |number    | course request number|
+| course_id    |number    | name of course section (CSE-031-01)|
+| course_name  |string    |   name of the course(Calculus 1)               |
+| instructor_name   |string    |  name of the instructor               |
+| course_type |     String     |   Lecture/ Discussion/ Lab              |
+|time|Day time|time of the class|
+
+
 ### Networking
-- [Add list of network requests by screen ]
+- Map/Home Screen
+    - (Read/GET) Query signed-in user's classes
+- MyClasses Screen
+    - (Read/GET) Query signed-in user's classes
+- Course Catalog Screen
+    - (Read/GET) Query all courses
+- Login Screen
+    - (Create/POST) Allow user sign-in
+    
+        public void loginUser() {
+        ParseUser.logInInBackground("<userName>", "<password>", (user, e) -> {
+        if (user != null) {
+            // Hooray! The user is logged in.
+        } else {
+            // Login failed. Look at the ParseException to see what happened.
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        });
+        }
+- Sign-up Screen
+    - (Create/POST) Create a new account
+        user.signUpInBackground(e -> {
+        if (e == null) {
+            // Here you should tell the user to verify the e-mail
+            ParseUser.logOut();
+        } else {
+            // Sign up didn't succeed. Look at the ParseException
+            // to figure out what went wrong
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+      });
+
 - [Create basic snippets for each Parse network request]
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
+    
+    
+Milestone 1: Login-Parse-Register View
+    
+    
+![](https://i.imgur.com/95GQCQU.gif)
