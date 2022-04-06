@@ -67,7 +67,7 @@ Allows users to search and view course schedules. Building location of classes c
 
 **Flow Navigation** (Screen to Screen)
 
-* Login -> Register (if new user) -> Home
+* Login -> Register (if a new user) -> Home
 * Home -> Search Bar
 * MyClasses -> Main section -> Lab/Discussion
 
