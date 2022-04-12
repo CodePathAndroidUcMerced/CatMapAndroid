@@ -29,10 +29,10 @@ Allows users to search and view course schedules. Building location of classes c
 
 **Required Must-have Stories**
 
-* User logs in to access their account. New user can create an account.
+* User logs in to access their account. New user can create an account. [*]
 *  User can search for a course, have the location displayed on a map with a marker.
 * User has profile page with saved classes.
-* View all classes by semester, major and more.
+* View all classes by semester, major and more [*].
 
 **Optional Nice-to-have Stories**
 
@@ -46,7 +46,7 @@ Allows users to search and view course schedules. Building location of classes c
 ### 2. Screen Archetypes
 
 * Login
-   * User can login using their password and username.
+   * User can login using their password and username. [*]
 * Register
    * User signs up. 
 * Home Screen
@@ -54,7 +54,7 @@ Allows users to search and view course schedules. Building location of classes c
 * MyClasses Screen
   * Display user's saved classes
 * AllClasses
-  *  Display all course by semester, search by class category or text search.
+  *  Display all course by semester, search by class category or text search. [*]
 
 ### 3. Navigation
 
