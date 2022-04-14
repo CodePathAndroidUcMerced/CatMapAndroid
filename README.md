@@ -29,10 +29,10 @@ Allows users to search and view course schedules. Building location of classes c
 
 **Required Must-have Stories**
 
-* User logs in to access their account. New user can create an account. [*]
+*  [x] User logs in to access their account. New user can create an account. 
 *  User can search for a course, have the location displayed on a map with a marker.
 * User has profile page with saved classes.
-* View all classes by semester, major and more [*].
+* [x] View all classes by semester, major and more [*].
 
 **Optional Nice-to-have Stories**
 
@@ -143,3 +143,8 @@ Milestone 1: Login-Parse-Register View
     
     
 ![](https://i.imgur.com/95GQCQU.gif)
+
+    Gif Unit 10: Search classes by departement using Spinner
+    
+    
+![](https://i.imgur.com/d9w7Xca.gif)
