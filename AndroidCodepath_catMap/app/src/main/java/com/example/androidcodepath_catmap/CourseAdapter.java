@@ -62,12 +62,21 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
             private TextView crn;
             private TextView courseId;
             private TextView courseName;
+            private TextView instructorName;
+            private TextView days;
+            private TextView hours;
+            private TextView room;
+
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 crn = (TextView) itemView.findViewById(R.id.crn);
                 courseId = (TextView) itemView.findViewById(R.id.courseId);
                 courseName = (TextView) itemView.findViewById(R.id.courseName);
+                instructorName = (TextView) itemView.findViewById(R.id.tvInstructorName);
+                days = (TextView) itemView.findViewById(R.id.tvDays);
+                hours = (TextView) itemView.findViewById(R.id.tvHours);
+                room = (TextView) itemView.findViewById(R.id.tvRoom);
             }
 
             public void bind(classes course) {
@@ -75,6 +84,11 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
                 crn.setText(course.getCrn());
                 courseId.setText(course.getCourse_id());
                 courseName.setText(course.getCourse_name());
+                instructorName.setText(course.getInstructor());
+                days.setText(course.getDays());
+                hours.setText(course.getHours());
+                room.setText(course.getRoom());
+
             }
         }
 
