@@ -2,7 +2,11 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="4dp">>
 
     android:layout_margin="6dp">
 
@@ -83,6 +87,22 @@
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/tvHours"
             tools:text="Room" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvInstructorName"
+            android:layout_marginRight="5dp"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/btnRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvInstructorName"
+            android:layout_toEndOf="@id/btnAdd"
+            android:text="remove" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

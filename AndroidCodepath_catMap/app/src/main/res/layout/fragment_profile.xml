@@ -26,6 +26,12 @@
             android:scaleType="fitXY"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <Button
+            android:id="@+id/btnCam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile Picture" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvcourse"
             android:layout_width="match_parent"

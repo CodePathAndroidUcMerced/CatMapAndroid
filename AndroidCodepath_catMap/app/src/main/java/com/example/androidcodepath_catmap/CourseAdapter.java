@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,10 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import fragments.Home;
+
+import fragments.Home;
 
 public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolder> {
 
@@ -67,6 +74,9 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
             private TextView hours;
             private TextView room;
 
+            private Button btnAdd;
+            private Button btnRemove;
+
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -77,6 +87,8 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
                 days = (TextView) itemView.findViewById(R.id.tvDays);
                 hours = (TextView) itemView.findViewById(R.id.tvHours);
                 room = (TextView) itemView.findViewById(R.id.tvRoom);
+                btnAdd = (Button) itemView.findViewById(R.id.btnAdd);
+                btnRemove = (Button) itemView.findViewById(R.id.btnRemove);
             }
 
             public void bind(classes course) {
@@ -88,6 +100,28 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
                 days.setText(course.getDays());
                 hours.setText(course.getHours());
                 room.setText(course.getRoom());
+
+                btnAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // ADD ARRAY TO DATABASE
+                        ParseUser.getCurrentUser().addAllUnique("classList", Arrays.asList(course.getObjectId()));
+                        ParseUser.getCurrentUser().saveInBackground();
+                    }
+                });
+
+                btnRemove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // ADD ARRAY TO DATABASE
+                        ArrayList<String> classList = (ArrayList) ParseUser.getCurrentUser().get("classList");
+                        classList.remove(course.getObjectId()); // remove from Back4App
+                        ParseUser.getCurrentUser().put("classList", classList);
+                        ParseUser.getCurrentUser().saveInBackground();
+                        courses.remove(course); // remove from RecyclerView
+                        notifyDataSetChanged(); // update dataset
+                    }
+                });
 
             }
         }
