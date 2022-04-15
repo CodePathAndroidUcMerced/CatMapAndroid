@@ -16,6 +16,7 @@ import com.example.androidcodepath_catmap.R;
  * create an instance of this fragment.
  */
 public class Map extends Fragment {
+    private static final String API_KEY = "AIzaSyBBPjX9cRtFWPDRfn9Iedp0ZN431OcI_A4";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
