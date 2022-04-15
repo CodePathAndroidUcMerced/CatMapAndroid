@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btLogin;
     private Button btRegister;
+    private TextView tvError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btLogin = findViewById(R.id.btLogin);
         btRegister = findViewById(R.id.btRegister);
+        tvError = findViewById(R.id.tvError);
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (e != null){
                     Log.e(TAG, "Issue with login ", e);
                     Toast.makeText(com.example.androidcodepath_catmap.LoginActivity.this, "Issue with login", Toast.LENGTH_SHORT);
+                    tvError.setText(getString(R.string.error));
 
                     return;
                 }
