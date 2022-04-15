@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         //To do Update fragment
                         Toast.makeText(MainActivity.this, "profile!", Toast.LENGTH_SHORT).show();
-                        fragment = new Profile();
+                        fragment = new Profile(getApplicationContext());
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();

@@ -53,7 +53,7 @@ public class Course extends Fragment {
     protected List<classes> allcourses;
     Spinner spinner;
     Button btSubmit;
-    String[] months = {"Anthropology","Bio Engin Small Scale Tech","Biological sciences","Chemistry","Chicano Chicana Studies","chinese",
+    String[] months = {"Anthropology","Bio Engin Small Scale Tech","Biological Sciences","Chemistry","Chicano Chicana Studies","chinese",
             "Civil Engineering","Cognitive Science","Community Research and Service","Computer Science & Engineering","Core","Critical Race & Ethnic Studies",
             "Economics","Education","Elect. Engr. & Comp. Sci.","Engineering","English","Environmental Commuinications","Envoronmental Engineering",
             "Environmentl Systems (GR)","Environmenta Systems Science","French","Geography","Global Arts Studies Program","heritage Stutudies","History","Human biology",
