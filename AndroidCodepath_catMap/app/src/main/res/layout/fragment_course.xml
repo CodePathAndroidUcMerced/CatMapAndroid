@@ -4,9 +4,32 @@
     android:layout_height="match_parent"
     tools:context="fragments.Course">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvcourse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         android:padding="8dp" />
+
+    <Button
+        android:id="@+id/btSubmit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="2dp"
+        android:text="@android:string/search_go"
+         />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
+        android:minHeight="48dp"
+        android:paddingStart="5dp"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:visibility="visible"
+        android:dropDownSelector="@drawable/spinner_state"/>
 </FrameLayout>

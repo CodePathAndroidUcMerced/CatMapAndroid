@@ -2,17 +2,13 @@ package fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.androidcodepath_catmap.R;
-import com.parse.ParseUser;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,8 +16,6 @@ import com.parse.ParseUser;
  * create an instance of this fragment.
  */
 public class Profile extends Fragment {
-
-    TextView username;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,14 +63,4 @@ public class Profile extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        username = view.findViewById(R.id.username); // get username from xml
-
-        username.setText(ParseUser.getCurrentUser().getUsername());
-    }
-
-
 }

@@ -1,5 +1,6 @@
 package fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,22 +9,33 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.androidcodepath_catmap.CourseAdapter;
 import com.example.androidcodepath_catmap.R;
+import com.example.androidcodepath_catmap.classes;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
-import java.io.InputStream;
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+import java.text.DateFormatSymbols;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +50,16 @@ public class Course extends Fragment {
 
     private RecyclerView rvcourse;
     protected CourseAdapter adapter;
+    protected List<classes> allcourses;
+    Spinner spinner;
+    Button btSubmit;
+    String[] months = {"Anthropology","Bio Engin Small Scale Tech","Biological sciences","Chemistry","Chicano Chicana Studies","chinese",
+            "Civil Engineering","Cognitive Science","Community Research and Service","Computer Science & Engineering","Core","Critical Race & Ethnic Studies",
+            "Economics","Education","Elect. Engr. & Comp. Sci.","Engineering","English","Environmental Commuinications","Envoronmental Engineering",
+            "Environmentl Systems (GR)","Environmenta Systems Science","French","Geography","Global Arts Studies Program","heritage Stutudies","History","Human biology",
+            "Interdisciplinary Humanities","Japanese","management","materials & BioMat Sci & Engr","Materials Science & Engr","Mathematics","Mechanical Engineering",
+            "Mjmt of Innov, Sust, and Tech","Nat Sciences Undergrad Studies","Natural Sciences Education","Philosophy","Political Science","Psychology","Public Health",
+            "Public Policy","Quantitative & Syatems biology","Sociology","Spanish","Spark","undergraduate Studies","World Culture & History","Writing"};
 
 
 
@@ -46,6 +68,7 @@ public class Course extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String TAG = "PoP";
 
 
 
@@ -56,6 +79,8 @@ public class Course extends Fragment {
     public Course() {
         // Required empty public constructor
     }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -82,6 +107,10 @@ public class Course extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
+
     }
 
     @Override
@@ -94,57 +123,132 @@ public class Course extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
         rvcourse = view.findViewById(R.id.rvcourse);
+        spinner = view.findViewById(R.id.spinner);
+        btSubmit = view.findViewById(R.id.btSubmit);
+        populateSpinnerMonth();
+
+        // Take the instance of Spinner and
+        // apply OnItemSelectedListener on it which
+        // tells which item of spinner is clicked
+
+        btSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String month = spinner.getSelectedItem().toString();
+                String mejor = month;
+                allcourses = new ArrayList<>();
+
+                adapter = new CourseAdapter(getContext(),allcourses);
+
+                rvcourse.setAdapter(adapter);
+                rvcourse.setLayoutManager(new LinearLayoutManager(getContext()));
+                queryClasses(mejor);
+
+                Toast.makeText(getContext(), month, Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
-        // json object
-        try {
-            JSONObject jsonObject = new JSONObject(JsonDataFromAssets());
-            JSONArray jsonArray = jsonObject.getJSONArray("fall2020");
+        //spinner.setOnItemSelectedListener(Activi);
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject userData = jsonArray.getJSONObject(i);
-                if (userData.getString("type").equals("LECT")) {
-                    crn.add(userData.getString("crn"));
-                    courseId.add(userData.getString("course_id"));
-                    courseName.add(userData.getString("course_name"));
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (parent.getId() == R.id.spinner) {
+                    String selectedMonth = parent.getSelectedItem().toString();
+                    //String selectedMonth = parent.getItemAtPosition(position).toString();
+                    //String selectedMonth = months[position];
+                    Toast.makeText(getContext(), "Selected: " + selectedMonth, Toast.LENGTH_SHORT).show();
                 }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        } catch (JSONException e) {
+        });
+
+//        allcourses = new ArrayList<>();
+//
+//        adapter = new CourseAdapter(getContext(),allcourses);
+//
+//        rvcourse.setAdapter(adapter);
+//        rvcourse.setLayoutManager(new LinearLayoutManager(getContext()));
+//        queryClasses();
+    }
+
+        private void populateSpinnerMonth() {
+            //months = new DateFormatSymbols().getMonths();
+            //months = new String [5]{"mathematic","physic"};
+            // Creating the ArrayAdapter instance having the month list
+            ArrayAdapter<String> monthAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, months);
+            monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Set the ArrayAdapter on the Spinner
+            spinner.setAdapter(monthAdapter);
+        }
+        // Create the instance of ArrayAdapter
+        // having the list of courses
+
+    private void queryClasses(String mejor){
+        ParseQuery<classes> query = ParseQuery.getQuery(classes.class);
+        //query.include(Course.KEY_USER);
+        query.whereEqualTo("subject",mejor);
+        query.orderByAscending("course_id");
+        query.setLimit(100);
+        try {
+            int count = query.count();
+            Toast.makeText(getContext(), "Count : "+count, Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
+        query.findInBackground(new FindCallback<classes>() {
+            @Override
+            public void done(List<classes> courses, ParseException e) {
+                if (e != null){
+                    Log.e(TAG, "issue with gettimg Posts",e);
+                    return;
+                }
+//                for (classes course : courses){
+//                    //Log.i(TAG, "Post:" + post.getDescription() + ", username: " + post.getUser().getUsername());
+//
+//                }
+                allcourses.addAll(courses);
+                adapter.notifyDataSetChanged();
+            }
 
-        adapter = new CourseAdapter(crn, courseId,courseName,getContext());
-
-        rvcourse.setAdapter(adapter);
-        rvcourse.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        });
     }
 
 
 
-        private String JsonDataFromAssets() {
-            String json = null;
 
-            try {
-                InputStream inputStream = getContext().getAssets().open("user.json");
 
-                int sizeofFile = inputStream.available();
-                byte[] bufferData = new byte[sizeofFile];
-
-                inputStream.read(bufferData);
-                inputStream.close();
-
-                json = new String(bufferData, "UTF-8");
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            return json;
-        }
+//        private String JsonDataFromAssets() {
+//            String json = null;
+//
+//            try {
+//                InputStream inputStream = getContext().getAssets().open("user.json");
+//
+//                int sizeofFile = inputStream.available();
+//                byte[] bufferData = new byte[sizeofFile];
+//
+//                inputStream.read(bufferData);
+//                inputStream.close();
+//
+//                json = new String(bufferData, "UTF-8");
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return null;
+//            }
+//
+//            return json;
+//        }
 
         // 0. create a layout for one row in the list
         // 1.create the adapter

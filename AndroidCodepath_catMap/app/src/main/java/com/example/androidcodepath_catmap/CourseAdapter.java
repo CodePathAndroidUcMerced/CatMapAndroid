@@ -10,20 +10,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.parse.ParseFile;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolder> {
 
-    Context context;
-    ArrayList<String> crn;
-    ArrayList<String> courseId;
-    ArrayList<String> courseName;
+    private Context context;
+    public List<classes> courses;
 
-    public CourseAdapter(ArrayList<String> crn, ArrayList<String> courseId, ArrayList<String> courseName, Context context) {
-        this.crn = crn;
-        this.courseId = courseId;
-        this.courseName = courseName;
+    public CourseAdapter( Context context, List<classes> courses) {
+
         this.context = context;
+        this.courses = courses;
     }
 
 
@@ -36,9 +37,8 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
 
     @Override
     public void onBindViewHolder (@NonNull ViewHolder holder,int position){
-            holder.crn.setText(crn.get(position));
-            holder.courseId.setText(courseId.get(position));
-            holder.courseName.setText(courseName.get(position));
+            classes course = courses.get(position);
+            holder.bind(course);
 
 //            holder.itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -54,14 +54,14 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
 
         @Override
         public int getItemCount () {
-            return courseName.size();
+            return courses.size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
 
-            TextView crn;
-            TextView courseId;
-            TextView courseName;
+            private TextView crn;
+            private TextView courseId;
+            private TextView courseName;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -70,6 +70,12 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
                 courseName = (TextView) itemView.findViewById(R.id.courseName);
             }
 
+            public void bind(classes course) {
+
+                crn.setText(course.getCrn());
+                courseId.setText(course.getCourse_id());
+                courseName.setText(course.getCourse_name());
+            }
         }
 
 }
