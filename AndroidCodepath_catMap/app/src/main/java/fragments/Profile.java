@@ -115,39 +115,6 @@ public class Profile extends Fragment {
         //User.addAllUnique("classList", Arrays.asList("10124", "15159"));
         //User.saveInBackground();
 
-        ArrayList<String> classList = (ArrayList) User.get("classList");
-        if(User.get("classList") == null){
-            Log.d("Keev", "BOOOOOO");
-        }
-        else{
-            for (String s : classList){
-                Log.d("Keev", "inside " + s);
-            }
-        }
 
-        ParseQuery<classes> query = ParseQuery.getQuery(classes.class);
-        //query.whereEqualTo("objectId", "MUMlPH125n"); //one class
-        query.whereContainedIn("crn", classList);
-        query.findInBackground(new FindCallback<classes>() {
-            @Override
-            public void done(List<classes> courses, ParseException e) {
-                if (e != null){
-                    Log.e("Keev", "issue with gettimg Posts",e);
-                    return;
-                }
-                if(courses.isEmpty()){
-                    Log.d("Keev", "wtfff");
-                }
-                String prof = "";
-                for (classes p : courses){
-                    prof += p.getString("room");
-                    Log.d("Keev", "inside");
-                }
-                username.setText(prof);
-                Log.d("Keev", "prof = " + prof);
-
-
-            }
-        });
     }
 }
