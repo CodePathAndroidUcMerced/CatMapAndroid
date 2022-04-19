@@ -105,20 +105,21 @@ public class Home extends Fragment {
 
         classList = (ArrayList) user.get("classList");
 
-        queryClasses(ParseUser.getCurrentUser(), classList);
+        if(classList != null) {
+            queryClasses(ParseUser.getCurrentUser(), classList);
+        }
+        else{
+            Log.d("Keev", "No classes!");
+        }
         refreshTotalClasses(classList);
     }
 
     public void refreshTotalClasses(ArrayList<String> classList){
-        if(user.get("classList") == null){
-            Log.d("Keev", "BOOOOOO");
-            return;
+        if(classList != null){
+            tvClassNum.setText("Total Classes: " + classList.size());
         }
         else{
-            for (String s : classList){
-                Log.d("Keev", "inside " + s);
-            }
-            tvClassNum.setText("Total Classes: " + classList.size());
+            tvClassNum.setText("Total Classes: 0");
         }
     }
 
