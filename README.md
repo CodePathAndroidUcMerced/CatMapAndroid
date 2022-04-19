@@ -31,7 +31,7 @@ Allows users to search and view course schedules. Building location of classes c
 
 *  [x] User logs in to access their account. New user can create an account. 
 *  User can search for a course, have the location displayed on a map with a marker.
-* User has profile page with saved classes.
+* [x] User has profile page with saved classes.
 * [x] View all classes by semester, major and more [*].
 
 **Optional Nice-to-have Stories**
@@ -45,31 +45,33 @@ Allows users to search and view course schedules. Building location of classes c
 
 ### 2. Screen Archetypes
 
-* Login
-   * User can login using their password and username. [*]
-* Register
+* [x] Login/Register
+   * User can login using their password and username. 
    * User signs up. 
-* Home Screen
-   * Display the campus map, and allow user to search a class to display its location.
-* MyClasses Screen
+* [x] Profile
+   * Display user name, change profile picture.
+* [x] Home
   * Display user's saved classes
-* AllClasses
-  *  Display all course by semester, search by class category or text search. [*]
+* [x] Course
+  *  Display all course by semester, search by class category or text search.
+* Map 
+  * Display a map view of the campus with building name
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
 * Home
-* MyClasses
-* AllClasses
+* Course
+* Map
 * Profile
 
 **Flow Navigation** (Screen to Screen)
 
 * Login -> Register (if a new user) -> Home
-* Home -> Search Bar
-* MyClasses -> Main section -> Lab/Discussion
+* Course: View all classes(filter using spinner)
+* Home: view student saved classes
+* Map->
 
 
 
@@ -105,7 +107,7 @@ Classes
 ### Networking
 - Map/Home Screen
     - (Read/GET) Query signed-in user's classes
-- MyClasses Screen
+- Course Screen
     - (Read/GET) Query signed-in user's classes
 - Course Catalog Screen
     - (Read/GET) Query all courses
@@ -148,3 +150,7 @@ Milestone 1: Login-Parse-Register View
     
     
 ![](https://i.imgur.com/d9w7Xca.gif)
+    
+Unit 12 Milestone(profile View, Register and student saved classes)
+    
+![](https://i.imgur.com/3WY0CPj.gif)
