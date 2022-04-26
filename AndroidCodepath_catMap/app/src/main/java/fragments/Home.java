@@ -2,28 +2,13 @@ package fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.androidcodepath_catmap.CourseAdapter;
 import com.example.androidcodepath_catmap.R;
-import com.example.androidcodepath_catmap.classes;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,16 +16,6 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class Home extends Fragment {
-
-    ArrayList<String> crn = new ArrayList<>();
-    ArrayList<String> courseId = new ArrayList<>();
-    ArrayList<String> courseName = new ArrayList<>();
-
-    private RecyclerView rvcourse;
-    private TextView tvClassNum;
-    protected CourseAdapter adapter;
-    protected List<classes> userCourses;
-    private ParseUser user = ParseUser.getCurrentUser();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,62 +62,5 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        rvcourse = view.findViewById(R.id.rvcourse);
-        tvClassNum = view.findViewById(R.id.tvClassNum);
-        userCourses = new ArrayList<>();
-        adapter = new CourseAdapter(getContext(),userCourses);
-        ArrayList<String> classList;
-
-        rvcourse.setAdapter(adapter);
-        rvcourse.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-        classList = (ArrayList) user.get("classList");
-
-        if(classList != null) {
-            queryClasses(ParseUser.getCurrentUser(), classList);
-        }
-        else{
-            Log.d("Keev", "No classes!");
-        }
-        refreshTotalClasses(classList);
-    }
-
-    public void refreshTotalClasses(ArrayList<String> classList){
-        if(classList != null){
-            tvClassNum.setText("Total Classes: " + classList.size());
-        }
-        else{
-            tvClassNum.setText("Total Classes: 0");
-        }
-    }
-
-    private void queryClasses(ParseUser user, ArrayList<String> classList){
-        ParseQuery<classes> query = ParseQuery.getQuery(classes.class);
-        query.whereContainedIn("objectId", classList);
-        query.orderByAscending("course_id");
-
-        query.findInBackground(new FindCallback<classes>() {
-            @Override
-            public void done(List<classes> courses, ParseException e) {
-                if (e != null){
-                    Log.e("Keev", "issue with gettimg Posts",e);
-                    return;
-                }
-                if(courses.isEmpty()){
-                    Log.d("Keev", "wtfff");
-                    return;
-                }
-                userCourses.addAll(courses);
-                adapter.notifyDataSetChanged();
-                Log.d("Keev", "finished all");
-            }
-        });
     }
 }

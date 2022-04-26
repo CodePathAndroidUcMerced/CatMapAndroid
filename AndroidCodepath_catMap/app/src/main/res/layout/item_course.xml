@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="4dp">>
+    android:layout_height="wrap_content">
 
     android:layout_margin="6dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -20,89 +15,25 @@
             android:id="@+id/crn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="crn"
+            android:text="name"
             android:textColor="#003380"
-            android:textSize="20sp" />
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/courseId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/crn"
             android:text="course ID"
             android:textColor="#002480"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/courseName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/courseId"
             android:text="course name"
             android:textColor="#0B1F91"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tvInstructorName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/crn"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="5dp"
-            tools:text="Instru Name" />
-
-        <TextView
-            android:id="@+id/tvDays"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/courseId"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/tvInstructorName"
-            android:textSize="15sp"
-            tools:text="days" />
-
-        <TextView
-            android:id="@+id/tvHours"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/courseName"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/tvDays"
-            tools:text="Hours" />
-
-        <TextView
-            android:id="@+id/tvRoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/courseName"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/tvHours"
-            tools:text="Room" />
-
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvInstructorName"
-            android:layout_marginRight="5dp"
-            android:text="Add" />
-
-        <Button
-            android:id="@+id/btnRemove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvInstructorName"
-            android:layout_toEndOf="@id/btnAdd"
-            android:text="remove" />
-
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

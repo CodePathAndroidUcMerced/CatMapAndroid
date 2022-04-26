@@ -13,18 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidCodepath_catMap">
-
-        <!-- make sure within the application tag, otherwise app will crash with XmlResourceParser errors -->
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.catmaps.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/fileprovider" />
-        </provider>
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBBPjX9cRtFWPDRfn9Iedp0ZN431OcI_A4"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -38,7 +29,6 @@
             android:name=".MainActivity">
 
         </activity>
-
     </application>
 
 </manifest>
