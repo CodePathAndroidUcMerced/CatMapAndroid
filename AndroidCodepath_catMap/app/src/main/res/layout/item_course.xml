@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="crn"
-            android:textColor="#003380"
+            android:textColor="#0091B3"
             android:textSize="20sp" />
 
         <TextView
