@@ -135,7 +135,7 @@ public class Map extends Fragment {
                 }
 
                 //set start location and zooom
-                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(, 15.0f));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.36618895996571, -120.42428965977152), 15.0f));
             }
 
 
