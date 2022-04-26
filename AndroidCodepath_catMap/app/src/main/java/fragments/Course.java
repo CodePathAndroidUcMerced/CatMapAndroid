@@ -1,21 +1,21 @@
 package fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidcodepath_catmap.CourseAdapter;
 import com.example.androidcodepath_catmap.R;
@@ -24,17 +24,8 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.Toast;
-import java.text.DateFormatSymbols;
 
 
 /**
@@ -53,13 +44,12 @@ public class Course extends Fragment {
     protected List<classes> allcourses;
     Spinner spinner;
     Button btSubmit;
-    String[] months = {"Anthropology","Bio Engin Small Scale Tech","Biological sciences","Chemistry","Chicano Chicana Studies","chinese",
-            "Civil Engineering","Cognitive Science","Community Research and Service","Computer Science & Engineering","Core","Critical Race & Ethnic Studies",
-            "Economics","Education","Elect. Engr. & Comp. Sci.","Engineering","English","Environmental Commuinications","Envoronmental Engineering",
-            "Environmentl Systems (GR)","Environmenta Systems Science","French","Geography","Global Arts Studies Program","heritage Stutudies","History","Human biology",
-            "Interdisciplinary Humanities","Japanese","management","materials & BioMat Sci & Engr","Materials Science & Engr","Mathematics","Mechanical Engineering",
-            "Mjmt of Innov, Sust, and Tech","Nat Sciences Undergrad Studies","Natural Sciences Education","Philosophy","Political Science","Psychology","Public Health",
-            "Public Policy","Quantitative & Syatems biology","Sociology","Spanish","Spark","undergraduate Studies","World Culture & History","Writing"};
+    String[] months = {"Anthropology","Bioengineering","Biological Sciences","Chemistry","Chinese",
+            "Civil Engineering","Cognitive Science","Community Research and Service","Computer Science & Engineering","Critical Race & Ethnic Studies",
+            "Economics","Education","Elect. Engr. & Comp. Sci.","Engineering","English","Environmental Engineering",
+            "Environmental Systems (GR)","Environmental Systems Science","French","Geography","Global Arts Studies Program","Heritage Studies","History",
+            "Interdisciplinary Humanities","Japanese","Management","Materials & BioMat Sci & Engr","Materials Science & Engr","Mathematics","Mechanical Engineering",
+            "Mgmt of Innov, Sust, and Tech","Natural Sciences Education","Philosophy","Physics","Political Science","Psychology","Public Health","Quantitative & Systems Biology","Sociology","Spanish","Spark","Undergraduate Studies","Writing"};
 
 
 
