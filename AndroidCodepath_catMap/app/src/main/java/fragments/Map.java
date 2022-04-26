@@ -1,19 +1,17 @@
 package fragments;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.androidcodepath_catmap.R;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -106,10 +104,13 @@ public class Map extends Fragment {
                     //hello
 
                     // below line is use to move our camera to the specific location.
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
+                    //mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
+                    //mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
                     Log.i(TAG,"View location name" + location_name[i]);
                 }
+
+                //set start location and zooom
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(KL, 15.0f));
             }
 
 
