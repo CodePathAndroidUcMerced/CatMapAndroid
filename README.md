@@ -30,7 +30,7 @@ Allows users to search and view course schedules. Building location of classes c
 **Required Must-have Stories**
 
 *  [x] User logs in to access their account. New user can create an account. 
-*  User can search for a course, have the location displayed on a map with a marker.
+* [x] User can search for a course, have the location displayed on a map with a marker.
 * [x] User has profile page with saved classes.
 * [x] View all classes by semester, major and more [*].
 
@@ -154,3 +154,10 @@ Milestone 1: Login-Parse-Register View
 Unit 12 Milestone(profile View, Register and student saved classes)
     
 ![](https://i.imgur.com/3WY0CPj.gif)
+    
+    
+Unit 13 Milestone Map
+    
+![](https://i.imgur.com/mRsaJ7y.gif)
+ 
+    
