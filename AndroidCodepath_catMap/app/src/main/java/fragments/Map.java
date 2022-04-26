@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import com.example.androidcodepath_catmap.Building;
 import com.example.androidcodepath_catmap.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -122,7 +123,7 @@ public class Map extends Fragment {
 
                     // below line is use to add marker to each location of our array list.
 
-                    allMarker[i]= mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(location_name[i]));
+                    allMarker.set(i, mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(location_name.get(i))));
 
                     // below lin is use to zoom our camera on map.
                     //hello
@@ -130,11 +131,11 @@ public class Map extends Fragment {
                     // below line is use to move our camera to the specific location.
                     //mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
                     //mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-                    Log.i(TAG,"View location name" + location_name[i]);
+                    Log.i(TAG,"View location name" + location_name.get(i));
                 }
 
                 //set start location and zooom
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(KL, 15.0f));
+                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(, 15.0f));
             }
 
 
