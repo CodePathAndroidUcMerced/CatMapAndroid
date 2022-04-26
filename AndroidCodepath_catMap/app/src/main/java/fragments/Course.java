@@ -43,10 +43,12 @@ import java.text.DateFormatSymbols;
  * create an instance of this fragment.
  */
 public class Course extends Fragment {
+    public static  final String TAG = "Course";
 
     ArrayList<String> crn = new ArrayList<>();
     ArrayList<String> courseId = new ArrayList<>();
     ArrayList<String> courseName = new ArrayList<>();
+
 
     private RecyclerView rvcourse;
     protected CourseAdapter adapter;
@@ -68,7 +70,7 @@ public class Course extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public static final String TAG = "PoP";
+
 
 
 
@@ -219,6 +221,7 @@ public class Course extends Fragment {
 //                }
                 allcourses.addAll(courses);
                 adapter.notifyDataSetChanged();
+                Log.i(TAG,"classes size  " + allcourses.size());
             }
 
         });
