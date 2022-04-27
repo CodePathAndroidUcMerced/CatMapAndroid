@@ -160,7 +160,8 @@ public class Profile extends Fragment {
                 profileImg.setImageBitmap(takenImage);
 
                 //upload to back4app
-                //ParseUser.getCurrentUser().put("image", new ParseFile(photoFile));
+                ParseUser.getCurrentUser().put("image", new ParseFile(photoFile));
+                ParseUser.getCurrentUser().saveInBackground();
             } else { // Result was a failure
                 Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
