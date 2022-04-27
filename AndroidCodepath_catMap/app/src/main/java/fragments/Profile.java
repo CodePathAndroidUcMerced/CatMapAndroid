@@ -128,6 +128,7 @@ public class Profile extends Fragment {
     }
 
     private void launchCamera() {
+        Log.d("Keev", "launchCamera: inside");
         // create Intent to take a picture and return control to the calling application
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Create a File reference for future access
@@ -136,7 +137,7 @@ public class Profile extends Fragment {
         // wrap File object into a content provider
         // required for API >= 24
         // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-        Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.catmaps.fileprovider", photoFile);
+        Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.example.androidcodepath_catmap.provider", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
@@ -157,6 +158,9 @@ public class Profile extends Fragment {
                 // RESIZE BITMAP, see section below
                 // Load the taken image into a preview
                 profileImg.setImageBitmap(takenImage);
+
+                //upload to back4app
+                //ParseUser.getCurrentUser().put("image", new ParseFile(photoFile));
             } else { // Result was a failure
                 Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
