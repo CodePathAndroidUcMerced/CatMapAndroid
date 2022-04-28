@@ -13,6 +13,7 @@ public class ParseApplication extends Application {
 
         ParseObject.registerSubclass(classes.class);
         ParseObject.registerSubclass(Building.class);
+        ParseObject.registerSubclass(Room.class);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("eQpAhZ4ZXtGuo1swB7U6h665c6U0iIYAswvx1dP7")

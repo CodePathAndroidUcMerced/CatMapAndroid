@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.androidcodepath_catmap.Building;
 import com.example.androidcodepath_catmap.R;
+import com.example.androidcodepath_catmap.Room;
+import com.example.androidcodepath_catmap.classes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,6 +27,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -41,6 +45,9 @@ public class Map extends Fragment {
     // creating a variable
     // for search view.
     SearchView searchView;
+    public String roomName = new String();
+
+
 
     // below are the latitude and longitude
     // of 4 different locations.
@@ -57,6 +64,7 @@ public class Map extends Fragment {
     ArrayList <String>  location_name = new ArrayList<>();
     ArrayList <ParseFile> building_image = new ArrayList<>();
     ArrayList <String> description = new ArrayList<>();
+    ArrayList <String> aux = new ArrayList<>();
 
 
 
@@ -78,6 +86,10 @@ public class Map extends Fragment {
         // Initialize map fragment
         SupportMapFragment supportMapFragment=(SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.google_map);
+
+
+
+        //querryBuildingName(buildingId);
 
 
         // in below line we are initializing our array list.
@@ -110,8 +122,22 @@ public class Map extends Fragment {
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
+                Querryname("10621");
+                //gitquerryB();
+                //querryC();
                 mMap = googleMap;
                 queryBuilding();
+
+                //Log.i(TAG, "classes size  " + aux.get(0) );
+
+
+
+                //Querryname("10621");
+
+                //buildingId = queryBuildingId(roomName);
+
+
+
 
 
                 // inside on map ready method
@@ -156,9 +182,15 @@ public class Map extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 // on below line we are getting the
                 // location name from search view.
-                String location = searchView.getQuery().toString();
+                String text = searchView.getQuery().toString();
+                //queryBuildingLocation(text);
+                String location = text;
                 Log.i(TAG,"View location" + location);
                 Log.i(TAG,"View  1 " + location_name.size());
+//                Log.i(TAG, "room name check  0 " + aux.get(0));
+//                for (int i = 0; i < aux.size();i++) {
+//                    Log.i(TAG, "room name check  " + aux.get(i));
+//                }
 
 
                 for (int i = 0; i < location_name.size(); i++) {
@@ -185,7 +217,13 @@ public class Map extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
+
+
         });
+
+
+
+
 
 
       }
@@ -204,7 +242,7 @@ public class Map extends Fragment {
                     Log.e(TAG, "  issue with gettimg Posts",e);
 
                 }
-                Log.i(TAG,"buildings size  " + buildings.size());
+                //Log.i(TAG,"buildings size  " + buildings.size());
                 //buildings.addAll(build);
 
 
@@ -217,12 +255,12 @@ public class Map extends Fragment {
                     double lon = geop.getLongitude();
                     locationArrayList.add(new LatLng(lat,lon));
                     description.add(buildings.get(i).getDescription());
-                    Log.i(TAG,"name  " + location_name.get(i));
-                    Log.i(TAG,"description  " + description.get(i));
-                    Log.i(TAG,"geolocation  " + locationArrayList.get(i));
+                    //Log.i(TAG,"name  " + location_name.get(i));
+                    //Log.i(TAG,"description  " + description.get(i));
+                    //Log.i(TAG,"geolocation  " + locationArrayList.get(i));
 
                     allMarker.add(mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(location_name.get(i))));
-                    Log.i(TAG,"Marker added  " + location_name.get(i));
+                    //Log.i(TAG,"Marker added  " + location_name.get(i));
 
                     // below lin is use to zoom our camera on map.
                     //hello
@@ -230,7 +268,7 @@ public class Map extends Fragment {
                     // below line is use to move our camera to the specific location.
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
                     mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
-                    Log.i(TAG,"View location name" + location_name.get(i));
+                    //Log.i(TAG,"View location name" + location_name.get(i));
 
 
                 }
@@ -239,5 +277,48 @@ public class Map extends Fragment {
 
         });
     }
+
+    public void Querryname( String crn) {
+
+        ParseQuery<classes> query = ParseQuery.getQuery(classes.class);
+        //query.include(Course.KEY_USER);
+        query.whereEqualTo("crn", crn);
+
+        query.setLimit(1);
+        try {
+            List<classes> result = query.find();
+
+            aux.add(result.get(0).getRoom());
+            Log.i(TAG, "room name  " + aux.get(0));
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void querryB() {
+
+
+
+
+
+
+    }
+
+//    public void querryC (){
+//
+//        ParseQuery<Building> query2 = ParseQuery.getQuery(Building.class);
+//            query2.whereEqualTo("objectId", aux.get(1));
+//            query2.setLimit(1);
+//        try {
+//            List<Building> result = query2.find();
+//                aux.add(result.get(0).getName());
+//                Log.i(TAG, "building name  " + aux.get(2) );
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     }
