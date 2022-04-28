@@ -13,7 +13,8 @@ public class Room extends ParseObject {
 
     public String getName (){return getString(KEY_NAME); }
     public String getDescription (){ return getString(KEY_DESCRIPTION);}
-    public String getBid (){return getParseObject(KEY_BID);}
+    public ParseObject getBid (){return getParseObject(KEY_BID);}
+
 
 
 

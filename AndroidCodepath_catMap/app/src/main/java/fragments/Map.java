@@ -65,6 +65,7 @@ public class Map extends Fragment {
     ArrayList <ParseFile> building_image = new ArrayList<>();
     ArrayList <String> description = new ArrayList<>();
     ArrayList <String> aux = new ArrayList<>();
+    ArrayList<String> aux1 = new ArrayList<>();
 
 
 
@@ -122,23 +123,20 @@ public class Map extends Fragment {
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-                Querryname("10621");
-                //gitquerryB();
-                //querryC();
+//                aux.clear();
+//                aux1.clear();
+//                Querryname("15082");
+//
+//                runQuery();
+
                 mMap = googleMap;
                 queryBuilding();
 
                 //Log.i(TAG, "classes size  " + aux.get(0) );
 
-
-
                 //Querryname("10621");
 
                 //buildingId = queryBuildingId(roomName);
-
-
-
-
 
                 // inside on map ready method
                 // we will be displaying all our markers.
@@ -184,9 +182,16 @@ public class Map extends Fragment {
                 // location name from search view.
                 String text = searchView.getQuery().toString();
                 //queryBuildingLocation(text);
-                String location = text;
-                Log.i(TAG,"View location" + location);
-                Log.i(TAG,"View  1 " + location_name.size());
+                aux.clear();
+                aux1.clear();
+                Querryname(text);
+                runQuery();
+
+               String location = aux1.get(0);
+//                Log.i(TAG,"View index" + aux.get(0) + aux1.get(0));
+//                Log.i(TAG,"View location" + location);
+//                Log.i(TAG,"View  1 " + location_name.size());
+
 //                Log.i(TAG, "room name check  0 " + aux.get(0));
 //                for (int i = 0; i < aux.size();i++) {
 //                    Log.i(TAG, "room name check  " + aux.get(i));
@@ -284,6 +289,7 @@ public class Map extends Fragment {
         //query.include(Course.KEY_USER);
         query.whereEqualTo("crn", crn);
 
+
         query.setLimit(1);
         try {
             List<classes> result = query.find();
@@ -297,7 +303,59 @@ public class Map extends Fragment {
         }
     }
 
+
+    public void runQuery() {
+        ParseQuery<Room> innerQuery = ParseQuery.getQuery(Room.class);
+        innerQuery.include("b_id");
+        Log.i(TAG, "name of the room  " + aux.get(0));
+        innerQuery.whereEqualTo("name", aux.get(0));
+
+        try {
+            List<Room> room =  innerQuery.find();
+            //point = room.get(0).getParseObject("b_id");
+            for(Room rooms : room) {
+
+                aux1.add((String) rooms.getBid().get("name"));
+                Log.i(TAG, "room 12 name  " + rooms.getBid().get("name")+ aux1.get(0));
+
+            }
+            room.clear();
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery("Building");
+//        query.whereEqualTo("objectId", ParseQuery.getQuery(Building.class));
+//
+//        query.findInBackground((commentList, e) -> {
+//            if(e == null){
+//                for (ParseObject comment : commentList) {
+//                    ParseObject post = comment.getParseObject("objectId");
+//                    Log.i("Object found ",post.getObjectId());
+//                }
+//            }else{
+//                Toast.makeText(getContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
     public void querryB() {
+//        ParseQuery <Room> query = ParseQuery.getQuery(Room.class);
+//        query.whereEqualTo("name",aux.get(0));
+//        query.setLimit(1);
+//
+//        ParseQuery<Building> query4 = ParseQuery.getQuery(Building.class);
+//        query4.whereMatchesQuery("Room",query);
+//        //query.include("b_id.Building");
+//
+//
+//        query4.findInBackground()
+
 
 
 
