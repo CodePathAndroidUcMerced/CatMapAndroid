@@ -95,8 +95,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvInstructorName"
             android:layout_marginRight="5dp"
+            android:backgroundTint="#4CAF50"
             android:text="Add"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btnRemove"
@@ -104,8 +105,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvInstructorName"
             android:layout_toEndOf="@id/btnAdd"
+            android:backgroundTint="#F44336"
             android:text="remove"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

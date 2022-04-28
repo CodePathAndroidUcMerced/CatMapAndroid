@@ -1,6 +1,7 @@
 package com.example.androidcodepath_catmap;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.parse.ParseUser;
@@ -103,6 +105,8 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
                     // ADD ARRAY TO DATABASE
                     ParseUser.getCurrentUser().addAllUnique("classList", Arrays.asList(course.getObjectId()));
                     ParseUser.getCurrentUser().saveInBackground();
+                    btnRemove.setVisibility(View.VISIBLE);
+                    btnAdd.setVisibility(View.GONE);
                 }
             });
 
@@ -114,8 +118,33 @@ public class CourseAdapter extends RecyclerView.Adapter <CourseAdapter.ViewHolde
                     classList.remove(course.getObjectId()); // remove from Back4App
                     ParseUser.getCurrentUser().put("classList", classList);
                     ParseUser.getCurrentUser().saveInBackground();
-                    courses.remove(course); // remove from RecyclerView
                     notifyDataSetChanged(); // update dataset
+                    btnRemove.setVisibility(View.GONE);
+                    if(FragmentManager.findFragment(view).toString().contains("Home")) {
+                        courses.remove(course); // remove from RecyclerView
+                    }
+                }
+            });
+
+            cvCourse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("Keev", "onClick: working");
+                    if(FragmentManager.findFragment(view).toString().contains("Home")) {
+                        if (btnRemove.getVisibility() == View.VISIBLE) {
+                            btnRemove.setVisibility(View.GONE);
+                        } else {
+                            btnRemove.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    else if(FragmentManager.findFragment(view).toString().contains("Course")) {
+                        if (btnAdd.getVisibility() == View.VISIBLE) {
+                            btnAdd.setVisibility(View.GONE);
+                        } else {
+                            btnAdd.setVisibility(View.VISIBLE);
+                        }
+                    }
+
                 }
             });
 

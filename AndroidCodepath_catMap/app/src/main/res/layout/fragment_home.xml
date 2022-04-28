@@ -10,19 +10,34 @@
         android:orientation="vertical"
         android:padding="5dp">
 
+        <EditText
+            android:id="@+id/etCrn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter CRN..."
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnCrn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8BC34A"
+            android:text="Add Course" />
+
         <TextView
-            android:id="@+id/tvClassNum"
+            android:id="@+id/tvClassTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="My Classes"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            tools:text="Kevin" />
+            tools:text="My Classes" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvcourse"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:padding="8dp" />
 
     </LinearLayout>

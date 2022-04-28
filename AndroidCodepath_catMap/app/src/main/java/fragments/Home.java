@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,10 +39,13 @@ public class Home extends Fragment {
     ArrayList<String> courseName = new ArrayList<>();
 
     private RecyclerView rvcourse;
-    private TextView tvClassNum;
+    private TextView tvClassTitle;
+    private EditText etCrn;
+    private Button btnCrn;
     protected CourseAdapter adapter;
     protected List<classes> userCourses;
     private ParseUser user = ParseUser.getCurrentUser();
+    private ArrayList<String> classList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -93,10 +99,11 @@ public class Home extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         rvcourse = view.findViewById(R.id.rvcourse);
-        tvClassNum = view.findViewById(R.id.tvClassNum);
+        tvClassTitle = view.findViewById(R.id.tvClassTitle);
+        etCrn = view.findViewById(R.id.etCrn);
+        btnCrn = view.findViewById(R.id.btnCrn);
         userCourses = new ArrayList<>();
         adapter = new CourseAdapter(getContext(),userCourses);
-        ArrayList<String> classList;
 
         rvcourse.setAdapter(adapter);
         rvcourse.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -111,6 +118,13 @@ public class Home extends Fragment {
             Log.d("Keev", "No classes!");
         }
         refreshTotalClasses(classList);
+
+        btnCrn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addClassCrn(ParseUser.getCurrentUser(), etCrn.getText().toString());
+            }
+        });
     }
 
     public void refreshTotalClasses(ArrayList<String> classList){
@@ -139,6 +153,30 @@ public class Home extends Fragment {
                     return;
                 }
                 userCourses.addAll(courses);
+                adapter.notifyDataSetChanged();
+                Log.d("Keev", "finished all");
+            }
+        });
+    }
+
+    private void addClassCrn(ParseUser user, String crnString){
+        ParseQuery query = ParseQuery.getQuery(classes.class);
+        query.whereEqualTo("crn", crnString);
+
+        query.findInBackground(new FindCallback<classes>() {
+            @Override
+            public void done(List<classes> courses, ParseException e) {
+                if (e != null){
+                    Log.e("Keev", "issue with gettimg Posts",e);
+                    return;
+                }
+                if(courses.isEmpty()){
+                    Log.d("Keev", "wtfff");
+                    return;
+                }
+                user.addAllUnique("classList", Arrays.asList(courses.get(0).getObjectId()));
+                user.saveInBackground();
+                userCourses.add(0, courses.get(0));
                 adapter.notifyDataSetChanged();
                 Log.d("Keev", "finished all");
             }
