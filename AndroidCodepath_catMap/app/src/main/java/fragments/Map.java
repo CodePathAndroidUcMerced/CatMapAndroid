@@ -1,5 +1,7 @@
 package fragments;
 
+import static com.google.android.gms.maps.GoogleMap.*;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.androidcodepath_catmap.Building;
+import com.example.androidcodepath_catmap.InfoAdapter;
 import com.example.androidcodepath_catmap.R;
 import com.example.androidcodepath_catmap.Room;
 import com.example.androidcodepath_catmap.classes;
@@ -20,6 +23,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -158,9 +163,28 @@ public class Map extends Fragment {
                     Log.i(TAG,"View location name" + location_name.get(i));
                 }
 
+
+
+                mMap.setOnMarkerClickListener(this::onMarkerClick);
+
+
+
                 //set start location and zooom
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.36618895996571, -120.42428965977152), 15.0f));
+
             }
+
+            public boolean onMarkerClick ( final Marker marker){
+                //marker.setIcon(BitmapDescriptor BitmapDescriptorFactory.HUE_BLUE);
+                //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                return false;
+            }
+
+
+
+
+
+
 
 
 
@@ -170,9 +194,12 @@ public class Map extends Fragment {
         return view;
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         // initializing our search view.
         searchView = view.findViewById(R.id.idSearchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -202,10 +229,14 @@ public class Map extends Fragment {
                     Log.i(TAG,"View  1 " + location + " " + location_name.get(i));
 
                     if (location.equals(location_name.get(i))){
+                        //allMarker.get(i).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                         allMarker.get(i).showInfoWindow();
 
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationArrayList.get(i), 15));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
+                        double lat = locationArrayList.get(i).latitude;
+                        double lon = locationArrayList.get(i).longitude;
+
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationArrayList.get(i), 17));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom( new LatLng(lat,lon),17.0f));
 
 
                         Log.i(TAG,"View  2"+ location);
@@ -232,6 +263,8 @@ public class Map extends Fragment {
 
 
       }
+
+
 
 
 
@@ -263,8 +296,10 @@ public class Map extends Fragment {
                     //Log.i(TAG,"name  " + location_name.get(i));
                     //Log.i(TAG,"description  " + description.get(i));
                     //Log.i(TAG,"geolocation  " + locationArrayList.get(i));
+                    mMap.setInfoWindowAdapter(new InfoAdapter(getContext()));
 
-                    allMarker.add(mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(location_name.get(i))));
+
+                    allMarker.add(mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(location_name.get(i)).snippet(description.get(i))));
                     //Log.i(TAG,"Marker added  " + location_name.get(i));
 
                     // below lin is use to zoom our camera on map.
@@ -272,7 +307,7 @@ public class Map extends Fragment {
 
                     // below line is use to move our camera to the specific location.
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(locationArrayList.get(i)));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(16.0f));
                     //Log.i(TAG,"View location name" + location_name.get(i));
 
 
@@ -307,7 +342,8 @@ public class Map extends Fragment {
     public void runQuery() {
         ParseQuery<Room> innerQuery = ParseQuery.getQuery(Room.class);
         innerQuery.include("b_id");
-        Log.i(TAG, "name of the room  " + aux.get(0));
+        String str = removeAllDigit(aux.get(0));
+        Log.i(TAG, "name of the room  " + aux.get(0) + str);
         innerQuery.whereEqualTo("name", aux.get(0));
 
         try {
@@ -326,6 +362,27 @@ public class Map extends Fragment {
             e.printStackTrace();
         }
 
+    }
+
+    public static String removeAllDigit(String str)
+    {
+        // Converting the given string
+        // into a character array
+        char[] charArray = str.toCharArray();
+        String result = "";
+
+        // Traverse the character array
+        for (int i = 0; i < charArray.length; i++) {
+
+            // Check if the specified character is not digit
+            // then add this character into result variable
+            if (!Character.isDigit(charArray[i])) {
+                result = result + charArray[i];
+            }
+        }
+
+        // Return result
+        return result;
     }
 
 
