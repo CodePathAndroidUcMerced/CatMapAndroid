@@ -43,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="#002856"
         app:menu="@menu/menu_bottom_navigation" />
 
 </RelativeLayout>
