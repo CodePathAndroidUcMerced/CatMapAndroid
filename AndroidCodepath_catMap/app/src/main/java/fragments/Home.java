@@ -156,6 +156,7 @@ public class Home extends Fragment {
                 }
                 userCourses.addAll(courses);
                 adapter.notifyDataSetChanged();
+                rvcourse.scheduleLayoutAnimation();
                 Log.d("Keev", "finished all");
             }
         });
@@ -180,6 +181,7 @@ public class Home extends Fragment {
                 user.saveInBackground();
                 userCourses.add(0, courses.get(0));
                 adapter.notifyDataSetChanged();
+                rvcourse.scheduleLayoutAnimation();
                 Log.d("Keev", "finished all");
                 tvNoClasses.setVisibility(View.GONE);
             }

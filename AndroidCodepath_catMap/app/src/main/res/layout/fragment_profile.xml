@@ -33,6 +33,8 @@
                     android:text="TextView"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
                     tools:text="Kevin" />
 
                 <ImageView
@@ -62,7 +64,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:padding="8dp"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            />
 
     </LinearLayout>
 

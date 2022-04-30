@@ -214,6 +214,7 @@ public class Course extends Fragment {
 //                }
                 allcourses.addAll(courses);
                 adapter.notifyDataSetChanged();
+                rvcourse.scheduleLayoutAnimation();
                 Log.i(TAG,"classes size  " + allcourses.size());
             }
 
