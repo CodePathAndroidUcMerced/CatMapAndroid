@@ -39,7 +39,7 @@ public class InfoAdapter implements GoogleMap.InfoWindowAdapter {
                 switch (title) {
 
                     case "SE2":
-                        iv.setImageResource(R.drawable.campus_front);
+                        iv.setImageResource(R.drawable.se_b);
                         break;
                     case "KOLLIG":
                         iv.setImageResource(R.drawable.b_kl);
@@ -66,13 +66,13 @@ public class InfoAdapter implements GoogleMap.InfoWindowAdapter {
                         iv.setImageResource(R.drawable.campus_front);
                         break;
                     case "ACS":
-                        iv.setImageResource(R.drawable.campus_front);
+                        iv.setImageResource(R.drawable.acs_b);
                         break;
                     case "ADMIN":
                         iv.setImageResource(R.drawable.b_admin);
                         break;
                     case "CLSSRM":
-                        iv.setImageResource(R.drawable.campus_front);
+                        iv.setImageResource(R.drawable.clssrm_b);
                         break;
                     case "COB2":
                         iv.setImageResource(R.drawable.cob2);
