@@ -1,7 +1,5 @@
 package fragments;
 
-import static com.google.android.gms.maps.GoogleMap.*;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +21,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -32,7 +29,6 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -224,6 +220,9 @@ public class Map extends Fragment {
                 aux.clear();
                 aux1.clear();
                 Querryname(text);
+                if(aux.isEmpty()){
+                    return false;
+                }
                 runQuery();
 
                String location = aux1.get(0);
@@ -346,7 +345,10 @@ public class Map extends Fragment {
         query.setLimit(1);
         try {
             List<classes> result = query.find();
-
+            if(result.isEmpty()){
+                Toast.makeText(getContext(), "No results found!", Toast.LENGTH_SHORT);
+                return;
+            }
             aux.add(result.get(0).getRoom());
 
             Log.i(TAG, "room name  " + aux.get(0));
