@@ -10,6 +10,23 @@
         android:orientation="vertical"
         android:padding="5dp">
 
+        <TextView
+            android:id="@+id/tvClassTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="My Classes"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            tools:text="My Classes" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
         <EditText
             android:id="@+id/etCrn"
             android:layout_width="match_parent"
@@ -23,15 +40,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#8BC34A"
+            android:paddingBottom="8dp"
             android:text="Add Course" />
 
-        <TextView
-            android:id="@+id/tvClassTitle"
+        <View
+            android:id="@+id/divider2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="My Classes"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            tools:text="My Classes" />
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvcourse"

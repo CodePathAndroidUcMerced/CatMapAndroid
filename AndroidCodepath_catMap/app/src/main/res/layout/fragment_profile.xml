@@ -11,25 +11,49 @@
         android:orientation="vertical"
         android:padding="5dp">
 
-        <TextView
-            android:id="@+id/username"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            tools:text="Kevin" />
+            android:layout_margin="5dp"
+            app:cardBackgroundColor="#E5E5E5"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="4dp">
 
-        <ImageView
-            android:id="@+id/profileImg"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            tools:srcCompat="@tools:sample/avatars" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="TextView"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    tools:text="Kevin" />
+
+                <ImageView
+                    android:id="@+id/profileImg"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_below="@+id/username"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/image_border"
+                    android:cropToPadding="true"
+                    android:padding="8dp"
+                    android:scaleType="fitXY"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/btnCam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#005487"
             android:text="Edit Profile Picture" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -37,7 +61,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

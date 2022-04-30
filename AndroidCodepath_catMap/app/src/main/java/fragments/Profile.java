@@ -110,7 +110,9 @@ public class Profile extends Fragment {
             Glide.with(context).load(image.getUrl()).into(profileImg); // load image
         }
         else{
-            Log.d("Keev", "this shit failed");
+            Log.d("Keev", "this failed");
+            profileImg.setImageResource(R.drawable.blank_profile);
+            btnCam.setText("Set Profile Picture");
         }
 
         btnCam.setOnClickListener(new View.OnClickListener() {

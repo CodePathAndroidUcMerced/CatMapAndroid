@@ -26,7 +26,7 @@ public class InfoAdapter implements GoogleMap.InfoWindowAdapter {
             String title = marker.getTitle();
             TextView tvTitle = (TextView) view.findViewById(R.id.title);
             ImageView iv = (ImageView) view.findViewById(R.id.markerImage);
-            iv.setImageResource(R.drawable.cat);
+            iv.setImageResource(R.drawable.smolcat);
 
             if (!title.equals("")) {
                 tvTitle.setText(title);
