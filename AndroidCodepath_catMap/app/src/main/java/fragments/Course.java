@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +44,7 @@ public class Course extends Fragment {
     private RecyclerView rvcourse;
     protected CourseAdapter adapter;
     protected List<classes> allcourses;
+    private TextView tvSearchPrompt;
     Spinner spinner;
     Button btSubmit;
     String[] months = {"Anthropology","Bioengineering","Biological Sciences","Chemistry","Chinese",
@@ -121,6 +122,7 @@ public class Course extends Fragment {
         rvcourse = view.findViewById(R.id.rvcourse);
         spinner = view.findViewById(R.id.spinner);
         btSubmit = view.findViewById(R.id.btSubmit);
+        tvSearchPrompt = view.findViewById(R.id.tvSearchPrompt);
         populateSpinnerMonth();
 
         // Take the instance of Spinner and
@@ -130,6 +132,7 @@ public class Course extends Fragment {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tvSearchPrompt.setVisibility(View.GONE);
                 String month = spinner.getSelectedItem().toString();
                 String mejor = month;
                 allcourses = new ArrayList<>();
@@ -140,7 +143,7 @@ public class Course extends Fragment {
                 rvcourse.setLayoutManager(new LinearLayoutManager(getContext()));
                 queryClasses(mejor);
 
-                Toast.makeText(getContext(), month, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), month, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -155,7 +158,7 @@ public class Course extends Fragment {
                     String selectedMonth = parent.getSelectedItem().toString();
                     //String selectedMonth = parent.getItemAtPosition(position).toString();
                     //String selectedMonth = months[position];
-                    Toast.makeText(getContext(), "Selected: " + selectedMonth, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Selected: " + selectedMonth, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -194,7 +197,7 @@ public class Course extends Fragment {
         query.setLimit(100);
         try {
             int count = query.count();
-            Toast.makeText(getContext(), "Count : "+count, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Count : "+count, Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
             e.printStackTrace();
         }

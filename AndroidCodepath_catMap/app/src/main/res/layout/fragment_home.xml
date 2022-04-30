@@ -24,8 +24,10 @@
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
+            android:layout_height="3dp"
+            android:layout_marginTop="5dp"
+            android:background="?android:attr/listDivider"
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/etCrn"
@@ -47,14 +49,30 @@
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="3dp"
             android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/tvNoClasses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="@string/noClasses"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvcourse"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
-            android:padding="8dp" />
+            android:padding="8dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 

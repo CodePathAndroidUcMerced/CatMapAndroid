@@ -5,4 +5,8 @@
     <item
         android:id="@+id/logout"
         android:title="Logout" />
+    <item
+        android:id="@+id/profileMenu"
+        android:icon="@drawable/blank_profile"
+        app:showAsAction="always" />
 </menu>

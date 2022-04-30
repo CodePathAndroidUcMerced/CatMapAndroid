@@ -39,7 +39,7 @@ public class Home extends Fragment {
     ArrayList<String> courseName = new ArrayList<>();
 
     private RecyclerView rvcourse;
-    private TextView tvClassTitle;
+    private TextView tvNoClasses;
     private EditText etCrn;
     private Button btnCrn;
     protected CourseAdapter adapter;
@@ -99,7 +99,7 @@ public class Home extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         rvcourse = view.findViewById(R.id.rvcourse);
-        tvClassTitle = view.findViewById(R.id.tvClassTitle);
+        tvNoClasses = view.findViewById(R.id.tvNoClasses);
         etCrn = view.findViewById(R.id.etCrn);
         btnCrn = view.findViewById(R.id.btnCrn);
         userCourses = new ArrayList<>();
@@ -116,6 +116,7 @@ public class Home extends Fragment {
         }
         else{
             Log.d("Keev", "No classes!");
+            tvNoClasses.setVisibility(View.VISIBLE);
         }
         refreshTotalClasses(classList);
 
@@ -150,6 +151,7 @@ public class Home extends Fragment {
                 }
                 if(courses.isEmpty()){
                     Log.d("Keev", "wtfff");
+                    tvNoClasses.setVisibility(View.VISIBLE);
                     return;
                 }
                 userCourses.addAll(courses);
@@ -179,6 +181,7 @@ public class Home extends Fragment {
                 userCourses.add(0, courses.get(0));
                 adapter.notifyDataSetChanged();
                 Log.d("Keev", "finished all");
+                tvNoClasses.setVisibility(View.GONE);
             }
         });
     }

@@ -7,6 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/california_poppy_gold"-->
+<!--            android:minHeight="?attr/actionBarSize">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:srcCompat="@drawable/smolcat"-->
+<!--                tools:srcCompat="@drawable/smolcat">-->
+
+<!--            </ImageView>-->
+
+<!--        </androidx.appcompat.widget.Toolbar>-->
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
+
     <FrameLayout
         android:id="@+id/flContainer"
         android:layout_width="match_parent"

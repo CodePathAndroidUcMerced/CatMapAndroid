@@ -9,7 +9,7 @@
         android:id="@+id/rvcourse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="58dp"
         android:padding="8dp" />
 
     <Button
@@ -17,19 +17,38 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="300dp"
-        android:layout_marginTop="2dp"
-        android:text="@android:string/search_go"
-         />
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#8BC34A"
+        android:text="@android:string/search_go" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="10dp"
+        android:dropDownSelector="@drawable/spinner_state"
         android:minHeight="48dp"
         android:paddingStart="5dp"
         tools:ignore="SpeakableTextPresentCheck"
-        tools:visibility="visible"
-        android:dropDownSelector="@drawable/spinner_state"/>
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="57dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/tvSearchPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/searchPrompt"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        tools:visibility="visible" />
+
 </FrameLayout>
