@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
+import fragments.Map;
+
 public class InfoAdapter implements GoogleMap.InfoWindowAdapter {
 
 
@@ -24,12 +26,64 @@ public class InfoAdapter implements GoogleMap.InfoWindowAdapter {
         private void rendowWindowText(Marker marker, View view) {
 
             String title = marker.getTitle();
+
             TextView tvTitle = (TextView) view.findViewById(R.id.title);
+
+            String image = marker.getId();
+            String description = ":";
+
             ImageView iv = (ImageView) view.findViewById(R.id.markerImage);
-            iv.setImageResource(R.drawable.smolcat);
+            if (!image.equals("")) {
+
+
+                switch (title) {
+
+                    case "SE2":
+                        iv.setImageResource(R.drawable.campus_front);
+                        break;
+                    case "KOLLIG":
+                        iv.setImageResource(R.drawable.b_kl);
+                        break;
+                    case "SSB":
+                        iv.setImageResource(R.drawable.campus_front);
+                        break;
+                    case "SRE":
+                        iv.setImageResource(R.drawable.campus_front);
+                        break;
+                    case "SSM":
+                        iv.setImageResource(R.drawable.campus_front);
+                        break;
+                    case "BSP":
+                        iv.setImageResource(R.drawable.campus_front);
+                        break;
+                    case "SCIENG":
+                        iv.setImageResource(R.drawable.b_eng1);
+                        break;
+                    case "GLCR":
+                        iv.setImageResource(R.drawable.campus_front);
+                        break;
+                    case "GRAN":
+                        iv.setImageResource(R.drawable.campus_front);
+                        break;
+                    case "ACS":
+                        iv.setImageResource(R.drawable.campus_front);
+                        break;
+                    case "ADMIN":
+                        iv.setImageResource(R.drawable.b_admin);
+                        break;
+                    case "CLSSRM":
+                        iv.setImageResource(R.drawable.campus_front);
+                        break;
+                    case "COB2":
+                        iv.setImageResource(R.drawable.cob2);
+                        break;
+                    default:
+                        iv.setImageResource(R.drawable.campus_main_view);
+                }
+            }
 
             if (!title.equals("")) {
-                tvTitle.setText(title);
+                tvTitle.setText(title );
             }
 
             String snippet = marker.getSnippet();

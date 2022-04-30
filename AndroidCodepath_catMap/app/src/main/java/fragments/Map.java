@@ -65,12 +65,15 @@ public class Map extends Fragment {
     ArrayList<LatLng> locationArrayList = new ArrayList<>();
     //public Marker[] allMarker;
     ArrayList<Marker> allMarker = new ArrayList<>();
+    Marker preview;
+    int clickcount = 0;
     //public  ArrayList <String> name;
     ArrayList <String>  location_name = new ArrayList<>();
     ArrayList <ParseFile> building_image = new ArrayList<>();
     ArrayList <String> description = new ArrayList<>();
     ArrayList <String> aux = new ArrayList<>();
     ArrayList<String> aux1 = new ArrayList<>();
+    ArrayList<String> floorName = new ArrayList<>();
 
 
 
@@ -136,6 +139,7 @@ public class Map extends Fragment {
 
                 mMap = googleMap;
                 queryBuilding();
+                mMap.setOnMarkerClickListener(this::onMarkerClick);
 
                 //Log.i(TAG, "classes size  " + aux.get(0) );
 
@@ -165,7 +169,7 @@ public class Map extends Fragment {
 
 
 
-                mMap.setOnMarkerClickListener(this::onMarkerClick);
+
 
 
 
@@ -176,7 +180,15 @@ public class Map extends Fragment {
 
             public boolean onMarkerClick ( final Marker marker){
                 //marker.setIcon(BitmapDescriptor BitmapDescriptorFactory.HUE_BLUE);
-                //marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                //queryBuilding();;
+                if (clickcount !=0) {
+                    preview.setIcon(BitmapDescriptorFactory.defaultMarker());
+                }
+                preview = marker;
+                clickcount =1;
+
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                //marker.setAnchor(2,3);
                 return false;
             }
 
@@ -215,11 +227,11 @@ public class Map extends Fragment {
                 runQuery();
 
                String location = aux1.get(0);
-//                Log.i(TAG,"View index" + aux.get(0) + aux1.get(0));
-//                Log.i(TAG,"View location" + location);
-//                Log.i(TAG,"View  1 " + location_name.size());
+                Log.i(TAG,"View index" + aux.get(0) + aux1.get(0));
+                Log.i(TAG,"View location" + location);
+                Log.i(TAG,"View  1 " + location_name.size());
 
-//                Log.i(TAG, "room name check  0 " + aux.get(0));
+                Log.i(TAG, "room name check  0 " + aux.get(0));
 //                for (int i = 0; i < aux.size();i++) {
 //                    Log.i(TAG, "room name check  " + aux.get(i));
 //                }
@@ -227,10 +239,15 @@ public class Map extends Fragment {
 
                 for (int i = 0; i < location_name.size(); i++) {
                     Log.i(TAG,"View  1 " + location + " " + location_name.get(i));
+                    allMarker.get(i).setIcon(BitmapDescriptorFactory.defaultMarker());
 
                     if (location.equals(location_name.get(i))){
-                        //allMarker.get(i).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                        allMarker.get(i).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                         allMarker.get(i).showInfoWindow();
+                        preview = allMarker.get(i);
+                        clickcount =1;
+
+
 
                         double lat = locationArrayList.get(i).latitude;
                         double lon = locationArrayList.get(i).longitude;
@@ -300,6 +317,7 @@ public class Map extends Fragment {
 
 
                     allMarker.add(mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(location_name.get(i)).snippet(description.get(i))));
+
                     //Log.i(TAG,"Marker added  " + location_name.get(i));
 
                     // below lin is use to zoom our camera on map.
@@ -330,6 +348,7 @@ public class Map extends Fragment {
             List<classes> result = query.find();
 
             aux.add(result.get(0).getRoom());
+
             Log.i(TAG, "room name  " + aux.get(0));
 
 
@@ -351,8 +370,10 @@ public class Map extends Fragment {
             //point = room.get(0).getParseObject("b_id");
             for(Room rooms : room) {
 
+                floorName.add(rooms.getDescription());
+
                 aux1.add((String) rooms.getBid().get("name"));
-                Log.i(TAG, "room 12 name  " + rooms.getBid().get("name")+ aux1.get(0));
+                Log.i(TAG, "room 12 name  " + rooms.getBid().get("name")+ aux1.get(0) + rooms.getDescription());
 
             }
             room.clear();
