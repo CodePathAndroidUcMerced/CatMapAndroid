@@ -180,8 +180,8 @@ public class Home extends Fragment {
                 user.addAllUnique("classList", Arrays.asList(courses.get(0).getObjectId()));
                 user.saveInBackground();
                 userCourses.add(0, courses.get(0));
-                adapter.notifyDataSetChanged();
-                rvcourse.scheduleLayoutAnimation();
+                adapter.notifyItemRangeInserted(0,1);
+                rvcourse.scrollToPosition(0);
                 Log.d("Keev", "finished all");
                 tvNoClasses.setVisibility(View.GONE);
             }
