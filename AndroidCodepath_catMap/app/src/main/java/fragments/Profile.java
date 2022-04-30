@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,12 +23,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.androidcodepath_catmap.CourseAdapter;
+import com.example.androidcodepath_catmap.MainActivity;
 import com.example.androidcodepath_catmap.R;
 import com.example.androidcodepath_catmap.classes;
 import com.parse.ParseException;
@@ -50,6 +54,7 @@ public class Profile extends Fragment {
 
     private TextView username;
     private ImageView profileImg;
+    private MenuView.ItemView profileMenu;
     private Button btnCam;
     private File photoFile;
     private RecyclerView rvcourse;
@@ -99,21 +104,14 @@ public class Profile extends Fragment {
         ParseUser User = ParseUser.getCurrentUser(); // current user
         username = view.findViewById(R.id.username); // get username from xml
         profileImg = view.findViewById(R.id.profileImg); // get username from xml
+        profileMenu = view.findViewById(R.id.profileMenu);
         btnCam = view.findViewById(R.id.btnCam);
         userCourses = new ArrayList<>();
         adapter = new CourseAdapter(getContext(), userCourses);
 
         username.setText(User.getUsername()); // set username text
 
-        ParseFile image = User.getParseFile("image"); // get image
-        if(image != null) {
-            Glide.with(context).load(image.getUrl()).into(profileImg); // load image
-        }
-        else{
-            Log.d("Keev", "this failed");
-            profileImg.setImageResource(R.drawable.blank_profile);
-            btnCam.setText("Set Profile Picture");
-        }
+        updatePicture();
 
         btnCam.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +126,19 @@ public class Profile extends Fragment {
 
 
     }
+
+    private void updatePicture(){
+        ParseFile image = ParseUser.getCurrentUser().getParseFile("image"); // get image
+        if(image != null) {
+            Glide.with(context).load(image.getUrl()).into(profileImg); // load image
+        }
+        else{
+            Log.d("Keev", "this failed");
+            profileImg.setImageResource(R.drawable.blank_profile);
+            btnCam.setText("Set Profile Picture");
+        }
+    }
+
 
     private void launchCamera() {
         Log.d("Keev", "launchCamera: inside");
@@ -157,6 +168,8 @@ public class Profile extends Fragment {
             if (resultCode == RESULT_OK) {
                 // by this point we have the camera photo on disk
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                Drawable d = new BitmapDrawable(takenImage);
+                ((MainActivity)getActivity()).setMenuPic(d);
                 // RESIZE BITMAP, see section below
                 // Load the taken image into a preview
                 profileImg.setImageBitmap(takenImage);
@@ -164,6 +177,7 @@ public class Profile extends Fragment {
                 //upload to back4app
                 ParseUser.getCurrentUser().put("image", new ParseFile(photoFile));
                 ParseUser.getCurrentUser().saveInBackground();
+                //updatePicture();
             } else { // Result was a failure
                 Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }

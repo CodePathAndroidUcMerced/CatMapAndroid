@@ -29,12 +29,14 @@ import fragments.Profile;
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     final FragmentManager fragmentManager = getSupportFragmentManager();
+    private MenuItem profileMenu;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 //        return super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.logout,menu);
+        profileMenu = menu.findItem(R.id.profileMenu);
 
 
         ParseFile image = ParseUser.getCurrentUser().getParseFile("image"); // get image
@@ -116,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
         // Set default selection
         bottomNavigationView.setSelectedItemId(R.id.action_home);
 
+    }
+
+    public void setMenuPic(Drawable d){
+        profileMenu.setIcon(d);
     }
 
 
